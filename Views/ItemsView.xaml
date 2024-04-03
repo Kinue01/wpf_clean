@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="clean_arch.View.Views.ItemsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:clean_arch.View.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" 
+             d:DesignWidth="600"
+             Background="White">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.5*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <ListBox Grid.Column="0" Grid.RowSpan="2" SelectedItem="{Binding CurrentItem}" ItemsSource="{Binding Items}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <TextBlock Text="{Binding Path=Item_Name}" />
+                        <TextBlock Text="{Binding Path=Item_Description}" TextWrapping="Wrap" />
+                        <TextBlock Text="{Binding Path=Item_Type}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Grid Grid.Column="1" DataContext="{Binding CurrentItem}">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="1.7*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.3*" />
+                <RowDefinition Height="0.2*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="0.2*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Выбранный товар" HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" />
+
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="Название:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBox HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1" Text="{Binding Item_Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" />
+
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="Описание:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBox HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" Text="{Binding Item_Description, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" />
+
+            <TextBlock Grid.Column="0" Grid.Row="3" Text="Тип:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBox HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="3" Text="{Binding Item_Type, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" />
+        </Grid>
+        <StackPanel Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <Button Margin="10" Command="{Binding GetItemsCommand}" Content="Get" />
+            <Button Margin="10" Content="Update" />
+            <Button Margin="10" Content="Delete" />
+        </StackPanel>
+        <Button Grid.Column="2" Grid.RowSpan="2" Content=">" Height="30" Width="50" Command="{Binding NavigateAddingCommand}" />
+    </Grid>
+</UserControl>

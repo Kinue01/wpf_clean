@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="clean_arch.View.Views.ItemAddView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:clean_arch.View.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" 
+             d:DesignWidth="600"
+             Background="White">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="9*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Button Grid.Column="0" Content="Back" Command="{Binding NavigateItemsCommand}" Height="20" />
+
+        <Grid Grid.Column="1" DataContext="{Binding CurrentItem}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="2*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Добавление предмета" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="Название" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Transparent" Text="{Binding Item_Name, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="Описание" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" BorderBrush="Transparent" Text="{Binding Item_Description, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Grid.Column="0" Grid.Row="3" Text="Роль" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <ComboBox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding ItemTypes}" DisplayMemberPath="Type_Name" />
+        </Grid>
+
+        <Button Margin="50 0 0 0" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Add" Command="{Binding AddItemCommand}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <Button Margin="0 0 50 0" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Get types" Command="{Binding GetItemTypesCommand}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+    </Grid>
+</UserControl>

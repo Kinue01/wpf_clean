@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="clean_arch.View.Views.UsersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:clean_arch.View.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" 
+             d:DesignWidth="600"
+             Background="White">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <ListBox Grid.Column="0" Grid.RowSpan="2" SelectedItem="{Binding CurrentUser}" ItemsSource="{Binding Users}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <TextBlock Text="{Binding Path=User_Login}" />
+                        <TextBlock Text="{Binding Path=User_Role}" TextWrapping="Wrap" />
+                        <TextBlock Text="{Binding Path=User_Email}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Grid Grid.Column="1" DataContext="{Binding CurrentUser}">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Выбранный пользователь" HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" />
+
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="Логин:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBox HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1" Text="{Binding User_Login, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" />
+
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="Роль:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBox HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" Text="{Binding User_Role, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" />
+
+            <TextBlock Grid.Column="0" Grid.Row="3" Text="Почта:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBox HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="3" Text="{Binding User_Email, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" />
+        </Grid>
+        <StackPanel Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <Button Margin="10" Command="{Binding GetUsersCommand}" Content="Get" />
+            <Button Margin="10" Content="Add" />
+            <Button Margin="10" Content="Update" />
+            <Button Margin="10" Content="Delete" />
+        </StackPanel>
+    </Grid>
+</UserControl>
